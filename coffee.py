@@ -84,7 +84,7 @@ async def member_info(request):
 @app.options("/member_info")
 async def member_info(request):
     try:
-        return text("got you", headers={"Access-Control-Allow-Origin":"*"})
+        return text("got you", headers={"Access-Control-Allow-Origin":"*", "Access-Control-Allow-Headers":"*"})
     except Exception as e:
         print(e)
         return text(e)
