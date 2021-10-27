@@ -62,13 +62,13 @@ def db_modify(sql):
 @app.get("/test")
 async def test(request):
     try:
-        return text("Hello World")
+        return text("Hello World", headers={"Access-Control-Allow-Origin":"*"})
     except Exception as e:
         return text(str(e))
 
 @app.get("/favicon.ico")
 async def fav(request):
-    return text("nothing")
+    return text("nothing", headers={"Access-Control-Allow-Origin":"*"})
 
 @app.post("/member_info")
 async def member_info(request):
@@ -76,7 +76,7 @@ async def member_info(request):
         id = request.json['id']
         sql = 'SELECT * FROM `member_list` WHERE `id`={}'.format(id)
         result = db_fetchone(sql)
-        return json(result)
+        return json(result, headers={"Access-Control-Allow-Origin":"*", "Access-Control-Allow-Methods":"POST"})
     except Exception as e:
         print(e)
         return text(e)
@@ -84,7 +84,7 @@ async def member_info(request):
 @app.options("/member_info")
 async def member_info(request):
     try:
-        return text("got you")
+        return text("got you", headers={"Access-Control-Allow-Origin":"*"})
     except Exception as e:
         print(e)
         return text(e)
