@@ -1,4 +1,4 @@
-import re
+import json as js
 from sanic import Sanic, app
 from sanic.response import json, text
 import pymysql.cursors
@@ -76,7 +76,9 @@ async def member_info(request):
         id = request.json['id']
         sql = 'SELECT * FROM `member_list` WHERE `id`={}'.format(id)
         result = db_fetchone(sql)
-        return json(result, headers={"Access-Control-Allow-Origin":"*", "Access-Control-Allow-Methods":"POST"})
+        print(result)
+        info = js.dumps(result)
+        return json(info, headers={"Access-Control-Allow-Origin":"*", "Access-Control-Allow-Methods":"POST"})
     except Exception as e:
         print(e)
         return text(e)
