@@ -74,7 +74,8 @@ async def fav(request):
 async def member_info(request):
     try:
         id = request.json['id']
-        sql = 'SELECT * FROM `member_list` WHERE `id`={}'.format(id)
+        #sql = 'SELECT * FROM `member_list` WHERE `id`={}'.format(id)
+        sql = 'SELECT * FROM `member_list`'
         result = db_fetchone(sql)
         print(result)
         info = js.dumps(result)
